@@ -1,3 +1,5 @@
+// COMSC-210 | Lab 19 | Daniil Malakhov
+// IDE used: Codeblocks
 #include <iostream>
 #include <iomanip>
 
@@ -23,11 +25,19 @@ Chair() {
     }
 
 }
-Chair(int l, double p[SIZE]) {
+Chair(int l, double *p = new double[SIZE]) {
     prices = new double[SIZE];
     legs = l;
-    for (int i = 0; i < SIZE; i++)
-        prices[i] = p[i];
+    if (p == NULL)
+    {
+        for (int i = 0; i < SIZE; i++)
+            prices[i] = 0;
+    }
+    else
+    {
+        for (int i = 0; i < SIZE; i++)
+            prices[i] = p[i];
+    }
 }
 
 // setters and getters
@@ -65,8 +75,8 @@ int main() {
     chairPtr->print();
 
     //creating dynamic chair object with constructor
-    double arr[3] = {525.25, 434.34, 252.52};
-    Chair *livingChair = new Chair(3, arr);
+    Chair *livingChair = new Chair(3);
+    livingChair->setPrices(525.25, 434.34, 252.52);
     livingChair->print();
     delete livingChair;
     livingChair = nullptr;
